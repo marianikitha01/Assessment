@@ -24,3 +24,16 @@ Users can edit or delete their submitted feedback from the table.
 ## Screenshots
 
 ![form](https://github.com/marianikitha01/Assessment/blob/main/images/form.png)
+*Caption: This is a screenshot showcasing the basic html form that I created.*
+
+![error](https://github.com/marianikitha01/Assessment/blob/main/images/error.png)
+*Caption: This is a screenshot showcasing the error thrown when an user doesnot enter more than 1 sentence in a text area*
+
+![table](https://github.com/marianikitha01/Assessment/blob/main/images/table.png)
+*Caption: The content entered in the form is added to the table shown in the figure. The table also contains an edit and delete button, user can click on the buttons to perform CRUD opration on the form data*
+
+![edit](https://github.com/marianikitha01/Assessment/blob/main/images/edit.png)
+*Caption: This is a screenshot showcasing the form after clicking on the edit button in the table.*
+
+![local_storage](https://github.com/marianikitha01/Assessment/blob/main/images/local_storage.png)
+*Caption: This is a screenshot showcasing the local storage. The details entered in the form is reflected in this table.*
