@@ -24,7 +24,7 @@
             if (localStorage.usersRecord) {
                 usersArray = JSON.parse(localStorage.usersRecord);
                 for (var i = 0; i < usersArray.length; i++) {
-                    prepareTableCell(i, usersArray[i].name, usersArray[i].phno, usersArray[i].gender, usersArray[i].dob, usersArray[i].mail, usersArray[i].pwd)
+                    prepareTableCell(i, usersArray[i].name, usersArray[i].phno, usersArray[i].address, usersArray[i].feedback, usersArray[i].comments, usersArray[i].pwd)
                 }
             }
         }
@@ -32,44 +32,35 @@
         function onSubmit() {
             var name = document.getElementById("name").value;
             var phno = document.getElementById("phno").value;
-            if (document.getElementById('male').checked) {
-                var gender = document.getElementById("male").value;
-            }
-            else if (document.getElementById("female").checked) {
-                var gender = document.getElementById("female").value;
-            }
-            else {
-                var gender = document.getElementById("others").value;
-            }
-
-            var dob = document.getElementById("dob").value;
-            var mail = document.getElementById("mail").value;
             var pwd = document.getElementById("pwd").value;
             var address = document.getElementById("address").value;
-            if (name == "" && phno == "" && dob == "" && mail == "" && pwd == "" && address == "") {
+            var feedback = document.getElementById("feedback").value;
+            var comments = document.getElementById("comments").value;
+
+            if (name == "" && phno == "" && pwd == "" && address == "" && feedback == "" && comments == "") {
 
                 document.getElementById("error").innerHTML = "Please fill all the fields";
                 document.getElementById("error").style.color = "red";
                 document.getElementById("name").style.borderColor = "red";
                 document.getElementById("phno").style.borderColor = "red";
-                document.getElementById("dob").style.borderColor = "red";
-                document.getElementById("mail").style.borderColor = "red";
                 document.getElementById("pwd").style.borderColor = "red";
                 document.getElementById("address").style.borderColor = "red";
+                document.getElementById("feedback").style.borderColor = "red";
+                document.getElementById("comments").style.borderColor = "red";
                 return false;
             }
 
             else {
                 document.getElementById("name").style.borderColor = "lightgrey";
                 document.getElementById("phno").style.borderColor = "lightgrey";
-                document.getElementById("dob").style.borderColor = "lightgrey";
-                document.getElementById("mail").style.borderColor = "lightgrey";
                 document.getElementById("pwd").style.borderColor = "lightgrey";
                 document.getElementById("address").style.borderColor = "lightgrey";
+                document.getElementById("feedback").style.borderColor = "lightgrey";
+                document.getElementById("comments").style.borderColor = "lightgrey";
             }
             document.getElementById("error").innerHTML = "";
 
-            var name_correct = /^[A-Za-z]+$/;
+            var name_correct = /^[A-Za-z\s]+$/;
 
             if (name.match(name_correct)) {
                 document.getElementById("name").style.borderColor = "lightgrey";
@@ -120,19 +111,39 @@
 
             }
 
-            if(address.split('.').length <=1){
+            if (address.split('.').length <= 1) {
                 document.getElementById("addressmsg").innerHTML = "Please enter atleast one sentence";
                 document.getElementById("addressmsg").style.color = "red";
-                return false; 
+                return false;
             }
             else {
                 document.getElementById("addressmsg").innerHTML = "";
 
             }
 
+            if (feedback.split('.').length <= 1) {
+                document.getElementById("feedbackmsg").innerHTML = "Please enter atleast one sentence";
+                document.getElementById("feedbackmsg").style.color = "red";
+                return false;
+            }
+            else {
+                document.getElementById("feedbackmsg").innerHTML = "";
+
+            }
+
+            if (comments.split('.').length <= 1) {
+                document.getElementById("commentsmsg").innerHTML = "Please enter atleast one sentence";
+                document.getElementById("commentsmsg").style.color = "red";
+                return false;
+            }
+            else {
+                document.getElementById("commentsmsg").innerHTML = "";
+
+            }
+
             document.getElementById("message").innerHTML = "";
 
-            var userObj = { name: name, phno: phno, gender: gender, dob: dob, mail: mail, pwd: pwd }
+            var userObj = { name: name, phno: phno, pwd: pwd, address: address, feedback: feedback, comments: comments }
 
             if (selectIndex == -1) {
                 usersArray.push(userObj);
@@ -150,22 +161,21 @@
         }
 
 
-        function prepareTableCell(index, name, phno, gender, dob, mail) {
+        function prepareTableCell(index, name, phno, address, feedback, comments) {
             var table = document.getElementById("tablerows");
             var row = table.insertRow();
             var nameCell = row.insertCell(0);
             var phnoCell = row.insertCell(1);
-            var genderCell = row.insertCell(2);
-            var dobCell = row.insertCell(3);
-            var mailCell = row.insertCell(4);
+            var addressCell = row.insertCell(2);
+            var feedbackCell = row.insertCell(3);
+            var commentsCell = row.insertCell(4);
             var actionCell = row.insertCell(5);
 
             nameCell.innerHTML = name;
             phnoCell.innerHTML = phno;
-            genderCell.innerHTML = gender;
-            dobCell.innerHTML = dob;
-            mailCell.innerHTML = mail;
-
+            addressCell.innerHTML = address;
+            feedbackCell.innerHTML = feedback;
+            commentsCell.innerHTML = comments;
             actionCell.innerHTML = '<i id="btnEdit" class="fa-solid fa-pen" onclick="onEdit(' + index + ')"></i></br> <i id="btnDelete" class="fa-solid fa-trash" onclick="deletedata(' + index + ')"></i>';
         }
 
@@ -173,21 +183,11 @@
             selectIndex = -1;
             document.getElementById("name").value = "";
             document.getElementById("phno").value = "";
-
-            if (document.getElementById('male').checked) {
-                male.checked = false;
-            }
-            else if (document.getElementById("female").checked) {
-                female.checked = false;
-            }
-            else {
-                others.checked = false;
-            }
-            document.getElementById("dob").value = "";
-            document.getElementById("mail").value = "";
             document.getElementById("pwd").value = "";
             document.getElementById("address").value = "";
-        }   
+            document.getElementById("feedback").value = "";
+            document.getElementById("comments").value = "";
+        }
 
         var selectIndex = -1;
         function onEdit(index) {
@@ -195,14 +195,11 @@
             var userObj = usersArray[index];
             document.getElementById("name").value = userObj.name;
             document.getElementById("phno").value = userObj.phno;
-            document.getElementById("gender").value = userObj.gender;
-            document.getElementById("dob").value = userObj.dob;
-            document.getElementById("mail").value = userObj.mail
             document.getElementById("pwd").value = userObj.pwd;
+            document.getElementById("address").value = userObj.address;
+            document.getElementById("feedback").value = userObj.feedback;
+            document.getElementById("comments").value = userObj.comments;
         }
-
-
-
 
         function deletedata(index) {
             usersArray.splice(index, 1);
@@ -220,7 +217,7 @@
             <div class="col-12 col-lg-9 col-xl-7">
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
-                        <h2 class="mb-4">User Form</h2>
+                        <h2 class="mb-4">Feedback Form</h2>
 
                         <form>
                             <div class="form-group">
@@ -235,24 +232,6 @@
                                 <span id="phnomsg"></span>
                             </div>
 
-                            <p id="gender">Gender:</p>
-                            <input type="radio" id="male" name="gender" value="Male">
-                            <label for="male">Male</label><br>
-                            <input type="radio" id="female" name="gender" value="Female">
-                            <label for="female">Female</label><br>
-                            <input type="radio" id="others" name="gender" value="Other">
-                            <label for="other">Other</label><br><br>
-
-                            <div class="form-group">
-                                <label for="dob">DOB:</label>
-                                <input type="date" class="form-control" id="dob">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="mail">Email:</label>
-                                <input type="email" class="form-control" id="mail">
-                            </div>
-
                             <div class="form-group">
                                 <label for="pwd">Password:</label>
                                 <input type="password" class="form-control" id="pwd">
@@ -263,6 +242,18 @@
                                 <label for="address">Address:</label>
                                 <textarea class="form-control" id="address"></textarea>
                                 <span id="addressmsg"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="feedback">Feedback:</label>
+                                <textarea class="form-control" id="feedback"></textarea>
+                                <span id="feedbackmsg"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="comments">Additional Comments:</label>
+                                <textarea class="form-control" id="comments"></textarea>
+                                <span id="commentsmsg"></span>
                             </div>
 
                             <div id="error"></div>
@@ -283,9 +274,9 @@
                 <tr>
                     <th>Name</th>
                     <th>Phone Number</th>
-                    <th>Gender</th>
-                    <th>Date of birth</th>
-                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Feedback</th>
+                    <th>Additional Comments</th>
                     <th>Action</th>
                 </tr>
             </thead>
