@@ -20,3 +20,7 @@ JavaScript is utilized for form validation and handling user interactions.
 Data is stored locally using the localStorage object.
 The table dynamically updates with the submitted feedback records.
 Users can edit or delete their submitted feedback from the table.
+
+## Screenshots
+
+![form](https://github.com/marianikitha01/Assessment/blob/main/images/form.png)
