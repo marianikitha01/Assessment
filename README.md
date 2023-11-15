@@ -32,10 +32,10 @@ Users can edit or delete their submitted feedback from the table.
 
 
 ![table](https://github.com/marianikitha01/Assessment/blob/main/images/table.png)
-**: The content entered in the form is added to the table shown in the figure. The table also contains an edit and delete button, user can click on the buttons to perform CRUD opration on the form data.**
+**The content entered in the form is added to the table shown in the figure. The table also contains an edit and delete button, user can click on the buttons to perform CRUD opration on the form data.**
 
 ![edit](https://github.com/marianikitha01/Assessment/blob/main/images/edit.png)
-**: This is a screenshot showcasing the form after clicking on the edit button in the table.**
+**This is a screenshot showcasing the form after clicking on the edit button in the table.**
 
 ![local_storage](https://github.com/marianikitha01/Assessment/blob/main/images/local_storage.png)
-**Caption: This is a screenshot showcasing the local storage. The details entered in the form is reflected in this table.**
+**This is a screenshot showcasing the local storage. The details entered in the form is reflected in this table.**
